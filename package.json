@@ -1,0 +1,15 @@
+{
+  "name": "canopyos",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "tailwindcss -i app/static/input.css -o app/static/style.css --minify",
+    "test:browser": "playwright test"
+  },
+  "dependencies": { "htmx.org": "2.0.8" },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0",
+    "@playwright/test": "^1.51.0"
+  }
+}
