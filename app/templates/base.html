@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173e32">
+  <meta name="description" content="Turn every walk into climate data. Explore your surroundings with CanopyOS.">
+  <meta name="htmx-config" content='{"allowEval":false,"includeIndicatorStyles":false}'>
+  <title>{% block title %}CanopyOS — Climate Scout{% endblock %}</title>
+  <link rel="icon" href="/static/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+  <script defer src="/static/htmx.min.js"></script>
+  <script defer src="/static/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="CanopyOS home"><img src="/static/mark.svg" width="34" height="34" alt="">Canopy<span>OS</span><span class="beta">FIELD NOTES / 01</span></a>
+    <nav aria-label="Main navigation"><a href="/" {% if page == 'home' %}aria-current="page"{% endif %}>Explore</a><a href="/history" {% if page == 'history' %}aria-current="page"{% endif %}>My scans</a></nav>
+  </header>
+  <main id="main">{% block content %}{% endblock %}</main>
+  <footer class="site-footer"><span>CanopyOS <span class="footer-dot">●</span> Citizen science, one walk at a time.</span><span>Observe. Understand. Reimagine.</span></footer>
+  <div id="notification" class="notification" role="alert" hidden></div>
+</body>
+</html>

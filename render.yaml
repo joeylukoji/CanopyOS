@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: canopyos
+    runtime: docker
+    plan: standard
+    healthCheckPath: /api/v1/health
+    disk:
+      name: canopyos-data
+      mountPath: /var/data
+      sizeGB: 5
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data/canopyos
+      - key: HF_HOME
+        value: /var/data/model-cache
+      - key: JEV_API_KEY
+        sync: false
+      - key: JEV_MODEL
+        value: jev-latest
+      - key: GEMMA_ENDPOINT
+        value: ""
+      - key: GEMMA_MODEL
+        value: gemma3:1b

@@ -7,6 +7,7 @@
     "test:browser": "playwright test"
   },
   "dependencies": { "htmx.org": "2.0.8" },
+  "overrides": { "@parcel/watcher": "2.6.0" },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.0",
     "tailwindcss": "^4.1.0",

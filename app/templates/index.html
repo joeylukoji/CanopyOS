@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="status-dot"></span> YOUR NEIGHBORHOOD. A NEW PERSPECTIVE.</p>
+    <h1>A greener city<br>starts with a<br><em>closer look.</em></h1>
+    <p class="hero-description">Turn every walk into climate data. Capture an outdoor space and discover where nature could make a difference.</p>
+    <button class="button button-primary" id="start-scan"><span class="camera-icon" aria-hidden="true">◎</span> Start Climate Scan <span aria-hidden="true">↗</span></button>
+    <p class="button-note">One photo. A little curiosity. A fresh perspective.</p>
+    <div class="hero-footnote"><span class="little-leaf" aria-hidden="true">↟</span><p>Built for people who care<br><strong>about the places they call home.</strong></p></div>
+  </div>
+  <div class="field-card" aria-label="Illustration of an urban landscape, not an analyzed scan">
+    <div class="field-card-top"><span><span class="status-dot"></span> THE URBAN FIELD GUIDE</span><span>01 / OBSERVE</span></div>
+    <div class="landscape">
+      <svg viewBox="0 0 560 450" role="img" aria-label="Illustrated street with trees, buildings and open ground">
+        <rect width="560" height="450" fill="#dbe3d5"/>
+        <circle cx="442" cy="77" r="35" fill="#f2eedc"/>
+        <path d="M0 188 560 155V450H0Z" fill="#acbaa2"/>
+        <path d="m0 341 332-168 228 108v110L310 268 0 425Z" fill="#e4dfcd"/>
+        <path d="m0 370 328-171 232 110v47L323 240 0 405Z" fill="#7e8a80"/>
+        <path d="m25 384 300-165 214 108" fill="none" stroke="#dad9c5" stroke-width="3" stroke-dasharray="13 13"/>
+        <g stroke="#6a8171" stroke-width="1.5">
+          <path d="m59 183 91-43 67 31v119l-90 47-68-32Z" fill="#a7b9a6"/>
+          <path d="m59 183 68 32v122l-68-32Z" fill="#819784"/>
+          <path d="m127 215 90-44v119l-90 47Z" fill="#c7d1b9"/>
+          <path d="m292 105 67-33 62 30v112l-69 34-60-29Z" fill="#bfc9b1"/>
+          <path d="m292 105 60 29v114l-60-29Z" fill="#8fa38d"/>
+          <path d="m352 134 69-32v112l-69 34Z" fill="#d3d8c0"/>
+          <path d="m436 185 53-27 55 25v68l-54 29-54-27Z" fill="#9db198"/>
+          <path d="m490 211 54-28v68l-54 29Z" fill="#cbd0b8"/>
+        </g>
+        <g stroke="#6c8372" stroke-width="8" opacity=".7">
+          <path d="m147 226 0 16m23-27v16m24-27v16m-47 22v16m23-27v16m24-27v16M369 146v18m25-30v18m-25 25v18m25-31v18"/>
+        </g>
+        <g fill="#4b7556" stroke="#395d42" stroke-width="3">
+          <path d="M267 295v-78m-8 50 8 8 11-14M69 379v-75m383 77v-65" fill="none"/>
+          <ellipse cx="267" cy="228" rx="29" ry="44"/>
+          <ellipse cx="69" cy="308" rx="32" ry="43"/>
+          <ellipse cx="452" cy="315" rx="35" ry="47"/>
+        </g>
+        <g fill="#719363"><ellipse cx="252" cy="217" rx="13" ry="25"/><ellipse cx="55" cy="296" rx="16" ry="22"/><ellipse cx="438" cy="303" rx="16" ry="27"/></g>
+        <path d="m206 362 91-47 92 45-88 49Z" fill="#87965d" stroke="#dce4c6" stroke-width="2" stroke-dasharray="5 5"/>
+        <g fill="none" stroke="#f9fae8" stroke-width="2"><path d="M28 58V28h30M502 28h30v30M28 392v30h30M502 422h30v-30"/><path d="M268 190v35m-18-17h36" opacity=".7"/></g>
+      </svg>
+      <span class="landscape-label">A LITTLE LESS CONCRETE.<br>A LITTLE MORE POSSIBILITY.</span>
+      <span class="illustration-label">Concept illustration</span>
+    </div>
+    <div class="field-card-bottom"><span>Look beyond the everyday.</span><span class="round-arrow" aria-hidden="true">↗</span></div>
+  </div>
+</section>
+<section class="how-it-works" aria-labelledby="how-title">
+  <div class="section-intro"><p class="eyebrow">FROM OBSERVATION TO POSSIBILITY</p><h2 id="how-title">A small step outside.<br>A different way to see.</h2></div>
+  <ol class="steps"><li><span class="step-number">01</span><h3>Find your spot</h3><p>A street, a campus, an overlooked corner. Capture a wide outdoor view.</p></li><li><span class="step-number">02</span><h3>Read the landscape</h3><p>Open-weight vision identifies vegetation, hard surfaces, buildings and open ground.</p></li><li><span class="step-number">03</span><h3>Explore what’s possible</h3><p>Get an explained intervention to investigate, grounded in what the image shows.</p></li></ol>
+</section>
+<section class="recent-section"><div class="section-heading"><div><p class="eyebrow">YOUR FIELD NOTES</p><h2>Places you’ve noticed</h2></div><a class="text-link" href="/history">View all scans ↗</a></div>{% include 'scan-list.html' %}</section>
+<aside class="science-note"><span aria-hidden="true">✳</span><p><strong>Curiosity is the starting point.</strong> These are exploratory image indicators, not a scientific site assessment. Every real-world intervention needs a closer look on the ground.</p></aside>
+<dialog id="capture-dialog" aria-labelledby="capture-title">
+  <div class="dialog-header"><p class="eyebrow">A NEW FIELD NOTE</p><button type="button" class="icon-button" id="close-camera" aria-label="Close camera">×</button></div>
+  <h2 id="capture-title">See your surroundings differently.</h2><p class="muted">Stand outside and capture the full area. Avoid close-ups and identifiable people.</p>
+  <form id="capture-form">
+    <div class="camera-stage"><video id="camera" autoplay muted playsinline hidden></video><img id="preview" alt="Your captured outdoor scene" hidden><div id="camera-placeholder"><span aria-hidden="true">◎</span><p>Your camera preview will appear here.</p></div></div>
+    <p id="camera-status" role="status" class="muted">Requesting camera access…</p>
+    <label for="area-type">What kind of place is this?</label><select id="area-type" name="area_type"><option value="urban_open_space">Urban open space</option><option value="street">Street</option><option value="park">Park</option><option value="campus">Campus</option><option value="parking">Parking area</option></select>
+    <div class="capture-actions"><button type="button" id="take-photo" class="button button-primary" hidden>Capture photo</button><button type="button" id="retake" class="button button-secondary" hidden>Retake</button><button type="submit" id="analyze-photo" class="button button-primary" disabled>Analyze this place ↗</button></div>
+    <div class="upload-backup"><label class="text-link" for="image-file">Choose a photo instead</label><input id="image-file" type="file" accept="image/jpeg,image/png,image/webp"><small>JPEG, PNG or WebP · up to 8 MiB. Images stay private to this browser. Metadata is removed.</small></div>
+  </form>
+</dialog>
+{% endblock %}
