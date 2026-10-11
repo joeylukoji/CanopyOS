@@ -85,3 +85,43 @@ test('virtual camera capture creates a preview and releases the camera', async (
   await expect.poll(() => page.locator('#camera').evaluate(video => video.srcObject === null)).toBeTruthy();
   expect(await page.evaluate(() => window.testCameraTracks.every(track => track.readyState === 'ended'))).toBeTruthy();
 });
+
+test('invalid replacement clears a selected photo and reopening accepts the same file', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Start Climate Scan' }).click();
+  const input = page.locator('#image-file');
+  const valid = { name: 'outdoor.jpg', mimeType: 'image/jpeg', buffer: photo };
+  await input.setInputFiles(valid);
+  await expect(page.getByRole('button', { name: 'Analyze this place' })).toBeEnabled();
+  await input.setInputFiles({ name: 'notes.txt', mimeType: 'text/plain', buffer: Buffer.from('not a photo') });
+  await expect(page.getByRole('button', { name: 'Analyze this place' })).toBeDisabled();
+  await expect(page.locator('#preview')).toBeHidden();
+  await input.setInputFiles(valid);
+  await expect(page.getByRole('button', { name: 'Analyze this place' })).toBeEnabled();
+  await page.getByRole('button', { name: 'Close camera' }).click();
+  await page.getByRole('button', { name: 'Start Climate Scan' }).click();
+  await input.setInputFiles(valid);
+  await expect(page.getByRole('button', { name: 'Analyze this place' })).toBeEnabled();
+});
+
+test('late camera permission cannot replace a chosen photo', async ({ page }) => {
+  await page.addInitScript(() => {
+    navigator.mediaDevices.getUserMedia = () => new Promise(resolve => {
+      window.releaseCamera = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 160; canvas.height = 160;
+        const stream = canvas.captureStream();
+        window.lateCameraTracks = stream.getTracks();
+        resolve(stream);
+      };
+    });
+  });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Start Climate Scan' }).click();
+  await page.locator('#image-file').setInputFiles({ name: 'outdoor.jpg', mimeType: 'image/jpeg', buffer: photo });
+  await expect(page.locator('#preview')).toBeVisible();
+  await page.evaluate(() => window.releaseCamera());
+  await expect.poll(() => page.evaluate(() => window.lateCameraTracks.every(track => track.readyState === 'ended'))).toBeTruthy();
+  await expect(page.locator('#preview')).toBeVisible();
+  await expect(page.locator('#camera')).toBeHidden();
+});

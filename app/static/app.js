@@ -6,6 +6,7 @@ let stream = null;
 let selectedImage = null;
 let previewUrl = null;
 let notificationTimer;
+let cameraRequest = 0;
 
 function notify(message) {
   const element = $('#notification');
@@ -29,26 +30,39 @@ async function api(url, options = {}) {
 }
 
 function stopCamera() {
+  cameraRequest += 1;
   if (stream) stream.getTracks().forEach((track) => track.stop());
   stream = null;
   if ($('#camera')) $('#camera').srcObject = null;
 }
 
-async function startCamera() {
+function clearPreview() {
   selectedImage = null;
   $('#analyze-photo').disabled = true;
   $('#preview').hidden = true;
+  $('#preview').removeAttribute('src');
+  if (previewUrl) URL.revokeObjectURL(previewUrl);
+  previewUrl = null;
+}
+
+async function startCamera() {
+  clearPreview();
+  $('#image-file').value = '';
   $('#retake').hidden = true;
   $('#take-photo').hidden = true;
+  $('#camera').hidden = true;
   $('#camera-placeholder').hidden = false;
   $('#camera-status').textContent = 'Requesting camera access…';
   stopCamera();
+  const request = cameraRequest;
   try {
     if (!navigator.mediaDevices?.getUserMedia) throw new Error('Camera unavailable');
     const opened = await navigator.mediaDevices.getUserMedia({
       video: { facingMode: { ideal: 'environment' }, width: { ideal: 1600 } }, audio: false,
     });
-    if (!dialog.open) { opened.getTracks().forEach((track) => track.stop()); return; }
+    if (!dialog.open || request !== cameraRequest) {
+      opened.getTracks().forEach((track) => track.stop()); return;
+    }
     stream = opened;
     $('#camera').srcObject = stream;
     $('#camera').hidden = false;
@@ -56,6 +70,7 @@ async function startCamera() {
     $('#take-photo').hidden = false;
     $('#camera-status').textContent = 'Stand outside and capture the full area.';
   } catch {
+    if (!dialog.open || request !== cameraRequest) return;
     $('#camera').hidden = true;
     $('#camera-status').textContent = 'Camera access is unavailable. Allow camera permission on HTTPS or choose a photo below.';
   }
@@ -63,9 +78,22 @@ async function startCamera() {
 
 function preview(blob) {
   if (!blob) { notify('We could not capture this frame. Please try again.'); return; }
-  if (blob.size > 8 * 1024 * 1024) { notify('Choose a photo smaller than 8 MiB.'); return; }
-  if (!['image/jpeg', 'image/png', 'image/webp'].includes(blob.type)) {
-    notify('Please choose a JPEG, PNG or WebP image.'); return;
+  let error = null;
+  if (blob.size > 8 * 1024 * 1024) error = 'Choose a photo smaller than 8 MiB.';
+  else if (!['image/jpeg', 'image/png', 'image/webp'].includes(blob.type)) {
+    error = 'Please choose a JPEG, PNG or WebP image.';
+  }
+  if (error) {
+    clearPreview();
+    stopCamera();
+    $('#camera').hidden = true;
+    $('#camera-placeholder').hidden = false;
+    $('#take-photo').hidden = true;
+    $('#retake').hidden = false;
+    $('#image-file').value = '';
+    $('#camera-status').textContent = error;
+    notify(error);
+    return;
   }
   selectedImage = blob;
   if (previewUrl) URL.revokeObjectURL(previewUrl);

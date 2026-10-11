@@ -6,6 +6,12 @@ A mobile-first citizen-science prototype: photograph an outdoor place, inspect a
 real segmentation overlay, and explore a grounded greening recommendation.
 English UI, FastAPI, HTMX, Tailwind, SQLite and open-weight SegFormer.
 
+![CanopyOS home screen with its original urban illustration](docs/images/home.png)
+
+Built during Hacktoberfest Hack Day week (October 2026). See the
+[submission summary](docs/submission.md) for a concise project description and
+demo checklist. The illustration above is not an analyzed photograph.
+
 ## Run locally (Windows PowerShell)
 
 ```powershell

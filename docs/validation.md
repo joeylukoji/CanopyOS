@@ -2,16 +2,17 @@
 
 This file distinguishes software checks from real-world product acceptance.
 
-## Executed locally (2026-10-09)
+## Executed locally (through 2026-10-11)
 
 - 30 passing Python unit/API tests: metrics, score boundaries, unusable masks, provider contract
   handling, unsupported/truncated/oversize images, EXIF stripping, private asset
   access, ownership, full scan lifecycle, deletion, capacity and rate limits.
-- 8 passing Playwright tests: English landing, camera-denial backup, photo preview, actual HTTP
+- 12 passing Playwright tests: English landing, camera-denial backup, photo preview, actual HTTP
   upload/report/history/delete flow and no horizontal overflow at 320 px. Desktop
   and mobile projects pass. The model in these tests is a labelled test double.
   A canvas MediaStream exercises capture, retake and track cleanup; this does not
-  verify physical camera hardware. Cleanup assertions wait for the dialog close event.
+  verify physical camera hardware. Camera permission races and invalid file
+  replacement are covered. Cleanup assertions wait for the dialog close event.
 - Real SegFormer loaded from pinned safetensors and analyzed the ADE20K exterior
   photograph `ADE_val_00000001.jpg`. The first warm inference under the initial
   working runtime took 0.69 seconds. This is not end-to-end or phone latency.
@@ -26,7 +27,7 @@ This file distinguishes software checks from real-world product acceptance.
   vulnerabilities; pip-audit also reported zero known vulnerabilities. The
   Parcel watcher override to 2.6.0 removes the vulnerable
   micromatch/braces dependency from the development toolchain.
-- Graphify's deterministic AST map contains 106 nodes and 219 edges over ten
+- Graphify's deterministic AST map contains 107 nodes and 222 edges over ten
   first-party code files. Its extraction reports 37 dangling endpoint edges and
   26 collapsed directed edges: this map is an approximate navigation aid, not
   a complete dependency proof. No semantic model API was used.
@@ -57,4 +58,5 @@ mask and decision. The two downloaded ADE20K fixtures are smoke tests only.
 
 Also pending: actual phone camera on HTTPS, 3–5 outdoor locations, live Jev response,
 live Gemma explanation, target-host latency, public hosting and submission video.
-The system must not be called competition-ready until those checks are complete.
+Present this as a working prototype with those limits disclosed. Field-validated
+environmental claims require the field checks above.
