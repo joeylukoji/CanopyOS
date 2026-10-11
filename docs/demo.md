@@ -1,5 +1,8 @@
 # 60–90 second demo
 
+Use the [product gallery](demo-gallery.md) and its credited sample photographs
+when showing the workflow without a live outdoor location.
+
 1. **0–10s:** Show the real outdoor scene. “Cities need more nature. Where could we start?”
 2. **10–25s:** Open CanopyOS on a phone over HTTPS. Capture a wide view and inspect the preview.
 3. **25–45s:** Show genuine processing steps, then original and segmentation images.

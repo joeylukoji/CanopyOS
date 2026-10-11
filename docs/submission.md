@@ -6,6 +6,12 @@
 
 **Public repository:** https://github.com/joeylukoji/CanopyOS
 
+**Product screenshots:** [Desktop and mobile gallery](demo-gallery.md)
+
+**Repeatable demo photos:** [Lubumbashi museum](demo-photos/lubumbashi-museum.jpg)
+and [Cupertino park](demo-photos/cupertino-park.jpg), with licenses and credits in
+the gallery.
+
 **Short description:** CanopyOS turns an outdoor photograph into an exploratory
 urban-greening field note. An open-weight SegFormer model segments vegetation,
 paving, buildings and open ground; the app reports pixel-based indicators and a

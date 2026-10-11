@@ -12,6 +12,26 @@ Built during Hacktoberfest Hack Day week (October 2026). See the
 [submission summary](docs/submission.md) for a concise project description and
 demo checklist. The illustration above is not an analyzed photograph.
 
+### See the workflow
+
+The screenshots below show a real application run using an openly licensed
+photograph of the National Museum of Lubumbashi.
+
+**1. Capture an outdoor scene**
+
+![Photo preview in the CanopyOS capture dialog](docs/images/capture-desktop.png)
+
+**2. Inspect the segmentation and field note**
+
+![CanopyOS report with original photo, SegFormer overlay and recommendation](docs/images/lubumbashi-museum-report-desktop.png)
+
+**3. Revisit private scans**
+
+![CanopyOS scan history](docs/images/history-desktop.png)
+
+See the [full desktop and mobile gallery](docs/demo-gallery.md) for a second
+scene, phone layouts, measured outputs and photo credits.
+
 ## Run locally (Windows PowerShell)
 
 ```powershell
@@ -163,4 +183,5 @@ such as accounts, leaderboards, audio and digital twins are intentionally exclud
 
 Application code: MIT (see LICENSE). Vendored HTMX: 0BSD
 (`app/static/htmx-LICENSE.txt`). Third-party model weights and test images are not
-relicensed by this repository. See [sources](docs/sources.md).
+relicensed by this repository. Demonstration photographs within the gallery retain
+their own licenses. See [sources](docs/sources.md) and [photo credits](docs/demo-gallery.md#photo-credits).

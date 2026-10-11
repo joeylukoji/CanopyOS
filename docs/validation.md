@@ -20,6 +20,12 @@ This file distinguishes software checks from real-world product acceptance.
 - A separate real-model browser upload/report run completed in 1.26 seconds with
   the model already loaded and no JavaScript errors. Desktop and mobile report
   screenshots were captured. Rules and template fallbacks were explicitly shown.
+- Two further real-model browser scans generated the [product gallery](demo-gallery.md).
+  The Lubumbashi museum photo gave 44.7% classified coverage, a score of 31 and
+  a rules-based green-wall suggestion; the Cupertino park photo gave a score of
+  68 and a preservation suggestion. Both reports used explicit template
+  explanations. These are functional demonstrations on historic third-party
+  photos, not a field-accuracy assessment.
 - Docker image built successfully on Docker Desktop's Linux engine. The container
   served the health endpoint with truthful unconfigured/unloaded provider states.
   Container model inference and target-host behavior remain unverified.

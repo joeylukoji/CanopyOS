@@ -14,10 +14,15 @@ Checked during implementation on 2026-10-08.
 | Tailwind compilation | https://tailwindcss.com/docs/installation/tailwind-cli |
 | Persistent Render storage | https://render.com/docs/disks |
 | Two real validation photographs | https://huggingface.co/datasets/hf-internal-testing/fixtures_ade20k |
+| Lubumbashi museum demo photograph | https://commons.wikimedia.org/wiki/File:Lubumbashi_Museum.jpg (Mike Rosenberg, CC BY 2.0) |
+| Cupertino park demo photograph | https://commons.wikimedia.org/wiki/File:Trees_along_walkway_in_public_park_in_Cupertino,_California.JPG (Tomwsulcer, CC0 1.0) |
 
 Validation images were downloaded locally into ignored `artifacts/validation/`.
 They are not bundled or redistributed with the application. They are visual model
 smoke tests, not user field observations or evidence of model accuracy.
+
+The screenshots in [the product gallery](demo-gallery.md) contain separately
+licensed demo photographs; credit and modification details are provided there.
 
 The homepage streetscape is an original SVG illustration, explicitly labelled as
 an illustration. It is not a photograph, segmentation output or analyzed scan.
